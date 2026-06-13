@@ -1,0 +1,51 @@
+{
+  "name": "thomas-starter",
+  "version": "1.0.0",
+  "description": "Thomas's playground for learning",
+  "author": "Jeff Szcinski",
+  "repository": "git@github.com:jeffski13",
+  "license": "ISC",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "react-router build",
+    "dev": "react-router dev",
+    "start": "react-router dev --host",
+    "startofficial": "react-router-serve ./build/server/index.js",
+    "test": "vitest",
+    "testCoverage": "vitest --coverage",
+    "typecheck": "react-router typegen && tsc"
+  },
+  "dependencies": {
+    "@react-router/node": "^7.5.2",
+    "@react-router/serve": "^7.5.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@vitejs/plugin-react": "^4.4.1",
+    "bootstrap": "^5.3.5",
+    "firebase": "^12.6.0",
+    "isbot": "^5.1.17",
+    "path": "^0.12.7",
+    "react": "^19.0.0",
+    "react-bootstrap": "^2.10.10",
+    "react-dom": "^19.0.0",
+    "react-helmet": "^6.1.0",
+    "react-router": "^7.5.2"
+  },
+  "devDependencies": {
+    "@react-router/dev": "^7.5.2",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "@vitest/coverage-v8": "^3.2.4",
+    "jsdom": "^26.1.0",
+    "react-router-devtools": "^1.1.0",
+    "typescript": "^5.7.2",
+    "vite": "^7.1.11",
+    "vite-plugin-pwa": "^1.2.0",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.1.2"
+  }
+}
