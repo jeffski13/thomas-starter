@@ -1,2 +1,17 @@
 .homePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4rem;
+}
+
+.homePage-greeting {
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.homePage-icon {
+  margin-top: 2rem;
+  width: 200px;
 }
