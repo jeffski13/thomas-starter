@@ -9,7 +9,6 @@ import {
 import { useEffect } from 'react';
 import { Helmet } from "react-helmet";
 import type { Route } from "./+types/root";
-import "./app.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const links: Route.LinksFunction = () => [
