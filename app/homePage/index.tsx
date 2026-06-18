@@ -4,17 +4,40 @@ import './styles.css';
 
 export default function HomePage() {
   const [tunkyColor, setTunkyColor] = useState<string | undefined>(undefined);
+  const [tunkySize, setTunkySize] = useState<string | undefined>(undefined);
+  const [isFlying, setIsFlying] = useState(false);
 
   function randomColor() {
     return `#${Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0')}`;
   }
 
+  function randomSize() {
+    return `${(Math.random() * 10).toFixed(1)}rem`;
+  }
+
+  function handlePokedexClick() {
+    setTunkyColor(randomColor());
+    setTunkySize(randomSize());
+  }
+
   return (
     <div className="homePage" >
       <div>Good afternoon Professor Thomas.</div>
-      <div className="tunkyToe" style={{ color: tunkyColor }}>tunky toe</div>
-      <img src="/images/pokedex-icon.png" alt="Pokedex" 
-       onClick={() => setTunkyColor(randomColor())} style={{ cursor: 'pointer' }} 
+      <div className="tunkyToe" style={{ color: tunkyColor, fontSize: tunkySize }}>tunky toe</div>
+      <img src="/images/pokedex-icon.png" alt="Pokedex"
+       onClick={handlePokedexClick} style={{ cursor: 'pointer' }}
+      />
+      <img
+        src="/images/bleezebat.jpg"
+        alt="Bleeze Bat"
+        className={isFlying ? 'bleezeBatFlying' : ''}
+        style={{ cursor: 'pointer' }}
+        onClick={() => {
+          const audio = new Audio('/ah.mp3');
+          setIsFlying(true);
+          audio.play();
+          audio.onended = () => setIsFlying(false);
+        }}
       />
     </div>
   );
