@@ -1,7 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git tag *)"
+      "Bash(git tag *)",
+      "Bash(mkdir -p /Users/jeffszcinski/dev/thomas-starter/app/ticTacToe)",
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:5173/tictactoe)",
+      "Bash(chromium-cli screenshot *)",
+      "Bash(node -e ' *)"
+    ],
+    "additionalDirectories": [
+      "/Users/jeffszcinski/dev/thomas-starter/app"
     ]
   }
 }

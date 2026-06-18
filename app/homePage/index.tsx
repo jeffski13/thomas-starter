@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
+import TicTacToe from "../ticTacToe";
 import './styles.css';
 
 export default function HomePage() {
@@ -39,6 +40,7 @@ export default function HomePage() {
           audio.onended = () => setIsFlying(false);
         }}
       />
+      <TicTacToe />
     </div>
   );
 }
