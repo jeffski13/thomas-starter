@@ -1,2 +1,9 @@
 .homePage {
+  font-size: 3rem;
+  color: grey;
+  background-color: pink;
+}
+
+.uncleJeffy {
+  font-size: 0.8rem;
 }
