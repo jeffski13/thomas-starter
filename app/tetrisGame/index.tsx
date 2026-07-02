@@ -14,6 +14,7 @@ const COLORS: Record<string, string> = {
   Z: "#e74c3c",
   J: "#2980b9",
   L: "#e67e22",
+  crazy: "#7b8c79",
 };
 
 const SHAPES: Record<string, number[][][]> = {
@@ -50,6 +51,9 @@ const SHAPES: Record<string, number[][][]> = {
     [[0, 1], [1, 1], [2, 1], [0, 2]],
     [[0, 0], [1, 0], [1, 1], [1, 2]],
   ],
+  crazy: [
+    [[1, 0], [5, 0], [6, 0], [6, -1]],
+  ]
 };
 
 const PIECE_NAMES = Object.keys(SHAPES);
