@@ -32,10 +32,14 @@ export default function HomePage() {
 
   return (
     <div className="homePage" >
-      <div>Good afternoon Professor Thomas.</div>
+      <div>The Zaniest Website</div>
       <div className="uncleJeffy" style={{ color: jefffyColor, fontSize: jefffySize }}>Actually, Im uncle Jeffy</div>
       <Image src="/images/pokedex-icon.png" alt="Pokedex"
        onClick={handlePokedexClick} style={{ cursor: "pointer", width: "150px" }}
+      />
+      <Image src="/digiegg.jpg" alt="Digiegg"
+        onClick={() => { setJeffyColor("green"); setJeffySize("0.8rem"); }}
+        style={{ cursor: "pointer", width: "150px" }}
       />
       <Image src="/images/marioHat.png" alt="Mario Hat"
         className={hatFlying ? "marioHatFlying" : ""}
