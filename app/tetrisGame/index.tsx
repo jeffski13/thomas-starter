@@ -17,6 +17,13 @@ const COLORS: Record<string, string> = {
   crazy: "#7b8c79",
 };
 
+const CRAZY_COLORS = ["#e74c3c", "#f1c40f", "#2ecc71", "#3498db"];
+
+function cellColor(name: string, index: number): string {
+  if (name === "crazy") return CRAZY_COLORS[index % CRAZY_COLORS.length];
+  return COLORS[name];
+}
+
 const SHAPES: Record<string, number[][][]> = {
   I: [
     [[0, 1], [1, 1], [2, 1], [3, 1]],
@@ -53,6 +60,9 @@ const SHAPES: Record<string, number[][][]> = {
   ],
   crazy: [
     [[1, 0], [5, 0], [6, 0], [6, -1]],
+    [[5, -1], [5, 3], [5, 4], [6, 4]],
+    [[6, 3], [2, 3], [1, 3], [1, 4]],
+    [[2, 4], [2, 0], [2, -1], [1, -1]],
   ]
 };
 
@@ -90,9 +100,9 @@ function collides(board: Board, piece: Piece): boolean {
 
 function mergePiece(board: Board, piece: Piece): Board {
   const next = board.map(row => row.slice());
-  for (const [x, y] of pieceCells(piece)) {
-    if (y >= 0 && y < ROWS && x >= 0 && x < COLS) next[y][x] = piece.name;
-  }
+  pieceCells(piece).forEach(([x, y], i) => {
+    if (y >= 0 && y < ROWS && x >= 0 && x < COLS) next[y][x] = cellColor(piece.name, i);
+  });
   return next;
 }
 
@@ -257,7 +267,7 @@ export default function TetrisPage() {
                   style={{
                     width: CELL,
                     height: CELL,
-                    background: cell ? COLORS[cell] : "#1a1a1a",
+                    background: cell ? cell : "#1a1a1a",
                     border: cell ? "1px solid rgba(255,255,255,0.3)" : "1px solid #222",
                     boxSizing: "border-box",
                   }}
@@ -321,14 +331,15 @@ export default function TetrisPage() {
             >
               {Array.from({ length: 2 }, (_, y) =>
                 Array.from({ length: 4 }, (_, x) => {
-                  const filled = SHAPES[nextPiece.name][0].some(([cx, cy]) => cx === x && cy === y);
+                  const index = SHAPES[nextPiece.name][0].findIndex(([cx, cy]) => cx === x && cy === y);
+                  const filled = index !== -1;
                   return (
                     <div
                       key={`${x}-${y}`}
                       style={{
                         width: CELL * 0.7,
                         height: CELL * 0.7,
-                        background: filled ? COLORS[nextPiece.name] : "transparent",
+                        background: filled ? cellColor(nextPiece.name, index) : "transparent",
                         border: filled ? "1px solid rgba(255,255,255,0.3)" : "none",
                         boxSizing: "border-box",
                       }}
