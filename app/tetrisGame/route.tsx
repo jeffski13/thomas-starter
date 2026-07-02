@@ -4,7 +4,7 @@ import TetrisPage from ".";
 
 export function meta({ }: Route.MetaArgs) {
   return [
-    { title: "Jeff Szcinski" },
+    { title: "Tetris page man time" },
     { name: "Home Page", content: "Jeff Szcinski Personal Website" },
   ];
 }

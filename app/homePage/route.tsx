@@ -4,7 +4,7 @@ import HomePage from ".";
 
 export function meta({ }: Route.MetaArgs) {
   return [
-    { title: "Jeff Szcinski" },
+    { title: "Zansite" },
     { name: "Home Page", content: "Jeff Szcinski Personal Website" },
   ];
 }
