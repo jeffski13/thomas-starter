@@ -6,6 +6,15 @@
   flex-direction: column;
 }
 
+.bottomBlock {
+  width: 100%;
+  height: 900px;
+  background-color: rgb(0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .marioHatFlying {
   position: fixed;
   z-index: 9999;

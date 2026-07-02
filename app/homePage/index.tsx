@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Image } from "react-bootstrap";
 import TicTacToe from "../ticTacToe";
 import './styles.css';
@@ -6,6 +6,16 @@ import './styles.css';
 export default function HomePage() {
   const [jefffyColor, setJeffyColor] = useState("green");
   const [jefffySize, setJeffySize] = useState("0.8rem");
+  const [showLuigi, setShowLuigi] = useState(false);
+
+  useEffect(() => {
+    function handleScroll() {
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 1;
+      setShowLuigi(atBottom);
+    }
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   function randomColor() {
     return `#${Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, "0")}`;
@@ -48,6 +58,11 @@ export default function HomePage() {
         onClick={handleHatClick}
       />
       <TicTacToe />
+      <div className="bottomBlock">
+        {showLuigi && (
+          <Image src="/images/luigi.png" alt="Luigi" style={{ width: "400px" }} />
+        )}
+      </div>
     </div>
   );
 }
