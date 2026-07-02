@@ -1,6 +1,6 @@
 import type { Route } from "./+types/home";
 import ThomPageWithContent from "../infra/ThomPageWithContent"
-import HomePage from ".";
+import tetrisPage from ".";
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -9,7 +9,7 @@ export function meta({ }: Route.MetaArgs) {
   ];
 }
 
-const Content = ThomPageWithContent(HomePage);
+const Content = ThomPageWithContent(tetrisPage);
 export default function JeffskiHome() {
   return <Content />;
 }
