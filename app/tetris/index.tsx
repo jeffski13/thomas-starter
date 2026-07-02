@@ -12,8 +12,9 @@ const PIECES = {
   T: { cells: [[1,0],[0,1],[1,1],[2,1]], color: "#a000f0" },
   S: { cells: [[1,0],[2,0],[0,1],[1,1]], color: "#00f000" },
   Z: { cells: [[0,0],[1,0],[1,1],[2,1]], color: "#f00000" },
-  J: { cells: [[0,0],[0,1],[1,1],[2,1]], color: "#0000f0" },
-  L: { cells: [[2,0],[0,1],[1,1],[2,1]], color: "#f0a000" },
+  J: { cells: [[0,0],[0,1],[1,1],[2,1]], color: "#425dfad5" },
+  L: { cells: [[2,0],[0,1],[1,1],[2,1]], color: "#5fb78b" },
+  A: { cells: [[0,0],[5,0],[6,0],[6,1]], color: "#ff00b7"}
 } as const;
 
 type PieceKey = keyof typeof PIECES;
