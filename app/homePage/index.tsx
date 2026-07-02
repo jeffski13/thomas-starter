@@ -23,6 +23,7 @@ export default function HomePage() {
 
   return (
     <div className="homePage" >
+      <a href="/tetris">tetris</a>
       <div>tHe fuNniESt wEBSITe</div>
       <div className="tunkyToe" style={{ color: tunkyColor, fontSize: tunkySize }}>tunky toe</div>
       <img src="/images/pokedex-icon.png" alt="Pokedex"
