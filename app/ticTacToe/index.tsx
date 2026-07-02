@@ -164,20 +164,12 @@ export default function TicTacToe() {
           </button>
         ))}
       </div>
-      <button
+      <img
+        src="/images/lol.jpg"
+        alt="New Game"
         onClick={reset}
-        style={{
-          padding: "0.4rem 1.5rem",
-          fontSize: "1rem",
-          cursor: "pointer",
-          backgroundColor: "#333",
-          color: "white",
-          border: "none",
-          borderRadius: "0.4rem",
-        }}
-      >
-        New Game
-      </button>
+        style={{ cursor: "pointer", width: "100px", height: "auto" }}
+      />
     </div>
   );
 }

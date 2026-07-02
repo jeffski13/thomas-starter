@@ -23,7 +23,7 @@ export default function HomePage() {
 
   return (
     <div className="homePage" >
-      <div>Good afternoon Professor Thomas.</div>
+      <div>tHe fuNniESt wEBSITe</div>
       <div className="tunkyToe" style={{ color: tunkyColor, fontSize: tunkySize }}>tunky toe</div>
       <img src="/images/pokedex-icon.png" alt="Pokedex"
        onClick={handlePokedexClick} style={{ cursor: 'pointer' }}
