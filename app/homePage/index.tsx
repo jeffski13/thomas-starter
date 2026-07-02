@@ -7,6 +7,7 @@ export default function HomePage() {
   const [tunkyColor, setTunkyColor] = useState<string | undefined>(undefined);
   const [tunkySize, setTunkySize] = useState<string | undefined>(undefined);
   const [isFlying, setIsFlying] = useState(false);
+  const [showJumpscare, setShowJumpscare] = useState(false);
 
   function randomColor() {
     return `#${Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0')}`;
@@ -42,6 +43,17 @@ export default function HomePage() {
         }}
       />
       <TicTacToe />
+      <div
+        style={{ background: 'black', width: '100%', height: '900px', margin: '16px auto', cursor: 'pointer', position: 'relative', overflow: 'hidden' }}
+        onClick={() => {
+          setShowJumpscare(true);
+          new Audio('/laugh.mp3').play();
+        }}
+      >
+        {showJumpscare && (
+          <img src="/images/jumpscare.gif" alt="jumpscare" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        )}
+      </div>
     </div>
   );
 }
