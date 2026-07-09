@@ -5,7 +5,9 @@
       "Bash(npm run *)",
       "Skill(run)",
       "Skill(run:*)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(npx react-router *)",
+      "Bash(timeout 25 npx react-router build)"
     ]
   }
 }
