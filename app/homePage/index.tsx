@@ -26,6 +26,7 @@ export default function HomePage() {
     <div className="homePage" >
       <a href="/tetris">tetris</a>
       <div>tHe fuNniESt wEBSITe</div>
+      <a href="/Zenith">Zenith</a>
       <div className="tunkyToe" style={{ color: tunkyColor, fontSize: tunkySize }}>tunky toe</div>
       <img src="/images/pokedex-icon.png" alt="Pokedex"
        onClick={handlePokedexClick} style={{ cursor: 'pointer' }}
