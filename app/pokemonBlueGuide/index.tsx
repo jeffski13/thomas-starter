@@ -6,7 +6,7 @@ interface GuideSection {
 }
 
 
-export default function terrariaGuide() {
+export default function pokemonBlueGuide() {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem", marginTop: "1.5rem", color: "#333", padding: "0 1rem" }}>
       <h2 style={{ margin: 0 }}>Pokemon Guide</h2>
