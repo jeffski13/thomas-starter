@@ -43,7 +43,7 @@ export default function HomePage() {
   return (
     <div className="homePage" >
       <a href="/tetris">tetris</a>
-      <a href="/teraria-guide">terraria guide</a>
+      <a href="/pokemon-guide">Pokemon Blue Guide</a>
       <div>The Zaniest Website</div>
       <div className="uncleJeffy" style={{ color: jefffyColor, fontSize: jefffySize }}>Actually, Im uncle Jeffy</div>
       <Image src="/images/pokedex-icon.png" alt="Pokedex"
