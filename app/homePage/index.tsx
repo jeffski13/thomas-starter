@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Image } from "react-bootstrap";
 import TicTacToe from "../ticTacToe";
+import TopNav from "./TopNav";
 import './styles.css';
 
 export default function HomePage() {
@@ -42,8 +43,7 @@ export default function HomePage() {
 
   return (
     <div className="homePage" >
-      <a href="/tetris">tetris</a>
-      <a href="/pokemon-guide">Pokemon Blue Guide</a>
+      <TopNav />
       <div>The Zaniest Website</div>
       <div className="uncleJeffy" style={{ color: jefffyColor, fontSize: jefffySize }}>Actually, Im uncle Jeffy</div>
       <Image src="/images/pokedex-icon.png" alt="Pokedex"
