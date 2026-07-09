@@ -4,7 +4,7 @@ interface GuideSection {
 }
 
 
-export default function TerariaGuide() {
+export default function terrariaGuide() {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem", marginTop: "1.5rem", color: "#333", padding: "0 1rem" }}>
       <h2 style={{ margin: 0 }}>Terraria Guide</h2>

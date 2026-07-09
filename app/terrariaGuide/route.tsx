@@ -1,6 +1,6 @@
 import type { Route } from "./+types/home";
 import ThomPageWithContent from "../infra/ThomPageWithContent"
-import TerariaGuide from ".";
+import terrariaGuide from ".";
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -9,7 +9,7 @@ export function meta({ }: Route.MetaArgs) {
   ];
 }
 
-const Content = ThomPageWithContent(TerariaGuide);
-export default function JeffskiTerariaGuide() {
+const Content = ThomPageWithContent(terrariaGuide);
+export default function JeffskiterrariaGuide() {
   return <Content />;
 }
