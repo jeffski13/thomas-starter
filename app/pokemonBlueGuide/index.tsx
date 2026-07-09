@@ -42,7 +42,10 @@ export default function pokemonBlueGuide() {
         </ListGroup.Item>
       </ListGroup>
 
-      
+      <h5>How to:</h5>
+      <ListGroup as="ol" numbered>
+        <ListGroup.Item as="li">Navigate to the Silph Co. office.</ListGroup.Item>
+      </ListGroup>
     </div>
   );
 }
