@@ -130,6 +130,7 @@ export default function pokemonBlueGuide() {
         <img
           src="/images/pokemonGuide/pokeball.png"
           alt=""
+          onClick={() => setIsBouncing(false)}
           style={{
             position: "fixed",
             left: bouncingPos.x,
@@ -137,7 +138,7 @@ export default function pokemonBlueGuide() {
             width: `${BOUNCING_POKEBALL_SIZE}px`,
             height: `${BOUNCING_POKEBALL_SIZE}px`,
             zIndex: 1000,
-            pointerEvents: "none",
+            cursor: "pointer",
           }}
         />
       )}
