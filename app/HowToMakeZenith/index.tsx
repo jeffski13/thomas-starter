@@ -16,17 +16,33 @@ const craftingSteps = [
 
 export default function HowToMakeZenithPage() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem", padding: "1rem" }}>
+    <div
+      className="funny-border"
+      style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem", padding: "1rem", borderStyle: "dashed", borderWidth: "20px", borderRadius: "24px", boxSizing: "border-box", minHeight: "100vh" }}
+    >
+      <style>{`
+        @keyframes funny-border-spin {
+          0% { border-color: #ff595e; }
+          20% { border-color: #ffca3a; }
+          40% { border-color: #8ac926; }
+          60% { border-color: #1982c4; }
+          80% { border-color: #6a4c93; }
+          100% { border-color: #ff595e; }
+        }
+        .funny-border {
+          animation: funny-border-spin 4s linear infinite;
+        }
+      `}</style>
 
       <img src="/images/zenith/zenith.jpg" alt="true nights edge" height={100} />
       <Container><Row>
         <Col xs={1}></Col>
         <Col xs={3}><img src="images/zenith/logo.webp" style={{ height: "50px" }}></img></Col>
-        <Col xs={4}><h2 style={{ margin: 0 }}>How To Make Zenith</h2></Col>
+        <Col xs={4}><h1 style={{ margin: 0 }}>How To Make Zenith</h1></Col>
         <Col xs={4}></Col>
       </Row></Container>
 
-      <p style={{ color: "#072c71" }}>Coming soon.</p>
+      
       <h2>Materials list</h2>
       <ListGroup>
         <ListGroup.Item className="d-flex align-items-center gap-2">
