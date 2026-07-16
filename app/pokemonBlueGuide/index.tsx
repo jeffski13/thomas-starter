@@ -1,4 +1,5 @@
 import { Col, Container, ListGroup, Row } from "react-bootstrap";
+import "./styles.css";
 
 interface GuideSection {
   title: string;
@@ -42,11 +43,11 @@ const howToSteps: HowToStep[] = [
 
 export default function pokemonBlueGuide() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem", marginTop: "1.5rem", color: "#333", padding: "0 1rem" }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem", color: "#333", padding: "0 1rem", minHeight: "100vh", borderLeft: "16px solid red", borderRight: "16px solid blue" }}>
       <Container>
-        <Row>
+        <Row className="guideTitle" >
           <Col xs={4}></Col>
-          <Col xs={4}><h2 style={{ margin: 0 }}>Pokemon Guide</h2></Col>
+          <Col xs={4}><h2>Pokemon Guide</h2></Col>
           <Col xs={4}><img src="/images/pokemonGuide/logo.webp" style={{ height: "50px" }} /></Col>
         </Row>
       </Container>
