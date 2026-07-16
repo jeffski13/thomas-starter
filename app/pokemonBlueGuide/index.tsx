@@ -27,12 +27,7 @@ const howToSteps: HowToStep[] = [
   {
     text: "Navigate to the Silph Co. office.",
     image: "/images/pokemonGuide/steps/SilphCo.png",
-    alt: "Silph Co. office",
-  },
-  {
-    text: "Enter the office.",
-    image: "/images/pokemonGuide/steps/SilphCo.png",
-    alt: "Entering Silph Co.",
+    alt: "Silph Co. office and enter the Building",
   },
   {
     text: "Fight all team rocket grunts.",
