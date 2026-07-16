@@ -76,9 +76,17 @@ export default function pokemonBlueGuide() {
   const BOUNCING_POKEBALL_SIZE = 80;
   const [isBouncing, setIsBouncing] = useState(false);
   const [bouncingPos, setBouncingPos] = useState({ x: 0, y: 0 });
+  const [bouncingRotation, setBouncingRotation] = useState(0);
+  const [speed, setSpeed] = useState(4);
   const bouncingPosRef = useRef({ x: 0, y: 0 });
-  const bouncingVelRef = useRef({ dx: 4, dy: 3 });
+  const bouncingDirRef = useRef({ x: 1, y: 1 });
+  const bouncingRotationRef = useRef(0);
+  const speedRef = useRef(speed);
   const animationFrameRef = useRef<number | undefined>(undefined);
+
+  useEffect(() => {
+    speedRef.current = speed;
+  }, [speed]);
 
   useEffect(() => {
     if (!isBouncing) return;
@@ -88,28 +96,36 @@ export default function pokemonBlueGuide() {
       y: window.innerHeight / 2 - BOUNCING_POKEBALL_SIZE / 2,
     };
     setBouncingPos({ ...bouncingPosRef.current });
+    bouncingRotationRef.current = 0;
+    setBouncingRotation(0);
+    bouncingDirRef.current = { x: 1, y: 1 };
 
     const step = () => {
       const pos = bouncingPosRef.current;
-      const vel = bouncingVelRef.current;
+      const dir = bouncingDirRef.current;
+      const currentSpeed = speedRef.current;
 
-      pos.x += vel.dx;
-      pos.y += vel.dy;
+      pos.x += dir.x * currentSpeed;
+      pos.y += dir.y * currentSpeed * 0.75;
 
       if (pos.x <= 0) {
         pos.x = 0;
-        vel.dx = Math.abs(vel.dx);
+        dir.x = 1;
+        bouncingRotationRef.current += 15;
+        setBouncingRotation(bouncingRotationRef.current);
       } else if (pos.x + BOUNCING_POKEBALL_SIZE >= window.innerWidth) {
         pos.x = window.innerWidth - BOUNCING_POKEBALL_SIZE;
-        vel.dx = -Math.abs(vel.dx);
+        dir.x = -1;
+        bouncingRotationRef.current += 15;
+        setBouncingRotation(bouncingRotationRef.current);
       }
 
       if (pos.y <= 0) {
         pos.y = 0;
-        vel.dy = Math.abs(vel.dy);
+        dir.y = 1;
       } else if (pos.y + BOUNCING_POKEBALL_SIZE >= window.innerHeight) {
         pos.y = window.innerHeight - BOUNCING_POKEBALL_SIZE;
-        vel.dy = -Math.abs(vel.dy);
+        dir.y = -1;
       }
 
       setBouncingPos({ x: pos.x, y: pos.y });
@@ -137,10 +153,39 @@ export default function pokemonBlueGuide() {
             top: bouncingPos.y,
             width: `${BOUNCING_POKEBALL_SIZE}px`,
             height: `${BOUNCING_POKEBALL_SIZE}px`,
+            transform: `rotate(${bouncingRotation}deg)`,
+            transition: "transform 0.2s ease",
             zIndex: 1000,
             cursor: "pointer",
           }}
         />
+      )}
+      {isBouncing && (
+        <div
+          style={{
+            position: "fixed",
+            top: "1rem",
+            right: "1rem",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            background: "rgba(255, 255, 255, 0.9)",
+            padding: "0.5rem 0.75rem",
+            borderRadius: "8px",
+            boxShadow: "0 1px 4px rgba(0, 0, 0, 0.2)",
+            zIndex: 1001,
+          }}
+        >
+          <label htmlFor="pokeballSpeed" style={{ fontSize: "0.85rem" }}>Speed</label>
+          <input
+            id="pokeballSpeed"
+            type="range"
+            min={1}
+            max={15}
+            value={speed}
+            onChange={(e) => setSpeed(Number(e.target.value))}
+          />
+        </div>
       )}
       <Container>
         <Row className="guideTitle" >
