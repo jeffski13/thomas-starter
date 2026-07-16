@@ -140,43 +140,31 @@ export default function pokemonBlueGuide() {
     };
   }, [isBouncing]);
 
+  const pageWrapperVars = {
+    "--left-border-color": leftBorderColor,
+    "--right-border-color": rightBorderColor,
+  } as React.CSSProperties;
+
+  const bouncingPokeballVars = {
+    "--pokeball-left": `${bouncingPos.x}px`,
+    "--pokeball-top": `${bouncingPos.y}px`,
+    "--pokeball-rotation": `${bouncingRotation}deg`,
+  } as React.CSSProperties;
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem", color: "#333", padding: "0 1rem", minHeight: "100vh", borderLeft: `16px solid ${leftBorderColor}`, borderRight: `16px solid ${rightBorderColor}` }}>
+    <div className="pageWrapper" style={pageWrapperVars}>
       {isBouncing && (
         <img
           src="/images/pokemonGuide/pokeball.png"
           alt=""
+          className="bouncingPokeball"
           onClick={() => setIsBouncing(false)}
-          style={{
-            position: "fixed",
-            left: bouncingPos.x,
-            top: bouncingPos.y,
-            width: `${BOUNCING_POKEBALL_SIZE}px`,
-            height: `${BOUNCING_POKEBALL_SIZE}px`,
-            transform: `rotate(${bouncingRotation}deg)`,
-            transition: "transform 0.2s ease",
-            zIndex: 1000,
-            cursor: "pointer",
-          }}
+          style={bouncingPokeballVars}
         />
       )}
       {isBouncing && (
-        <div
-          style={{
-            position: "fixed",
-            top: "1rem",
-            right: "1rem",
-            display: "flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            background: "rgba(255, 255, 255, 0.9)",
-            padding: "0.5rem 0.75rem",
-            borderRadius: "8px",
-            boxShadow: "0 1px 4px rgba(0, 0, 0, 0.2)",
-            zIndex: 1001,
-          }}
-        >
-          <label htmlFor="pokeballSpeed" style={{ fontSize: "0.85rem" }}>Speed</label>
+        <div className="speedControlPanel">
+          <label htmlFor="pokeballSpeed" className="speedControlLabel">Speed</label>
           <input
             id="pokeballSpeed"
             type="range"
@@ -194,7 +182,7 @@ export default function pokemonBlueGuide() {
           <Col xs={4}>
             <img
               src="/images/pokemonGuide/logo.webp"
-              style={{ height: "50px", cursor: "pointer" }}
+              className="logoImage"
               onClick={() => setIsBouncing(true)}
             />
           </Col>
@@ -204,38 +192,38 @@ export default function pokemonBlueGuide() {
       <h3>how to get a master ball in blue version</h3>
       <h5>Requirements</h5>
       <ListGroup>
-        <ListGroup.Item style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.75rem" }}>
+        <ListGroup.Item className="requirementListItem">
           Saffron City Access
-          <img src="/images/pokemonGuide/materials/saffron-city.png" alt="Saffron City" style={{ width: "48px", height: "48px", objectFit: "cover" }} />
+          <img src="/images/pokemonGuide/materials/saffron-city.png" alt="Saffron City" className="requirementImage" />
         </ListGroup.Item>
-        <ListGroup.Item style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.75rem" }}>
+        <ListGroup.Item className="requirementListItem">
           Level 30+ pokemon team
-          <img src="/images/pokemonGuide/materials/pokeballx6.png" alt="Level 30+ pokemon team" style={{ width: "48px", height: "48px", objectFit: "cover" }} />
+          <img src="/images/pokemonGuide/materials/pokeballx6.png" alt="Level 30+ pokemon team" className="requirementImage" />
         </ListGroup.Item>
-        <ListGroup.Item style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.75rem" }}>
+        <ListGroup.Item className="requirementListItem">
           Flying Pokemon
-          <img src="/images/pokemonGuide/materials/flying-pokemon.png" alt="Flying Pokemon" style={{ width: "48px", height: "48px", objectFit: "cover" }} />
+          <img src="/images/pokemonGuide/materials/flying-pokemon.png" alt="Flying Pokemon" className="requirementImage" />
         </ListGroup.Item>
-        <ListGroup.Item style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.75rem" }}>
+        <ListGroup.Item className="requirementListItem">
           Cleared Celadon Game Corner
-          <img src="/images/pokemonGuide/materials/celadon-game-corner.png" alt="Celadon Game Corner" style={{ width: "48px", height: "48px", objectFit: "cover" }} />
+          <img src="/images/pokemonGuide/materials/celadon-game-corner.png" alt="Celadon Game Corner" className="requirementImage" />
         </ListGroup.Item>
-        <ListGroup.Item style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.75rem" }}>
+        <ListGroup.Item className="requirementListItem">
           10 Super Potions
-          <img src="/images/pokemonGuide/materials/super-potion.png" alt="Super Potions" style={{ width: "48px", height: "48px", objectFit: "cover" }} />
+          <img src="/images/pokemonGuide/materials/super-potion.png" alt="Super Potions" className="requirementImage" />
         </ListGroup.Item>
       </ListGroup>
 
       <h5>How to:</h5>
-      <div style={{ display: "flex", flexDirection: "column", width: "100%", maxWidth: "450px", gap: "1rem" }}>
+      <div className="howToStepsContainer">
         {howToSteps.map((step, index) => (
-          <div key={step.text} style={{ display: "flex", flexDirection: "column", gap: "0.5rem", padding: "1rem", border: "2px solid #333", borderRadius: "8px" }}>
-            <span style={{ alignSelf: "flex-start", fontWeight: "bold", fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "#666" }}>
+          <div key={step.text} className="howToStepCard">
+            <span className="howToStepLabel">
               Step {index + 1}
             </span>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
-              <p style={{ margin: 0, flex: 1, fontSize: "0.85rem" }}>{step.text}</p>
-              <img src={step.image} alt={step.alt} style={{ width: "64px", height: "64px", objectFit: "cover", borderRadius: "4px" }} />
+            <div className="howToStepContent">
+              <p className="howToStepText">{step.text}</p>
+              <img src={step.image} alt={step.alt} className="howToStepImage" />
             </div>
           </div>
         ))}
