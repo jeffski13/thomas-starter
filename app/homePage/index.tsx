@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import TicTacToe from "../ticTacToe";
+import Checkers from "../checkers";
+import ExplosionButton from "../explosionButton";
 import './styles.css';
 
 export default function HomePage() {
@@ -44,6 +46,8 @@ export default function HomePage() {
         }}
       />
       <TicTacToe />
+      <Checkers />
+      <ExplosionButton />
       <div
         style={{ background: 'black', width: '100%', height: '900px', margin: '16px auto', cursor: 'pointer', position: 'relative', overflow: 'hidden' }}
         onClick={() => {

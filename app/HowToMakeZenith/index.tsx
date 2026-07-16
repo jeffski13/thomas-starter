@@ -67,7 +67,14 @@ export default function HowToMakeZenithPage() {
           ></img>
         </Col>
         <Col xs={4}><h1 style={{ margin: 0 }}>How To Make Zenith</h1></Col>
-        <Col xs={4}></Col>
+        <Col xs={4}>
+          <img
+            src="/images/pokedex-icon.png"
+            alt="pokedex"
+            style={{ height: "50px", cursor: "pointer" }}
+            onClick={() => new Audio("/augh.mp3").play()}
+          />
+        </Col>
       </Row></Container>
 
       
