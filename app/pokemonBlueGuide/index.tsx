@@ -22,29 +22,33 @@ export default function pokemonBlueGuide() {
       <ListGroup>
         <ListGroup.Item style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.75rem" }}>
           Saffron City Access
-          <img src="/images/pokemonGuide/saffron-city.png" alt="Saffron City" style={{ width: "48px", height: "48px", objectFit: "cover" }} />
+          <img src="/images/pokemonGuide/materials/saffron-city.png" alt="Saffron City" style={{ width: "48px", height: "48px", objectFit: "cover" }} />
         </ListGroup.Item>
         <ListGroup.Item style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.75rem" }}>
           Level 30+ pokemon team
-          <img src="/images/pokemonGuide/pokeballx6.png" alt="Level 30+ pokemon team" style={{ width: "48px", height: "48px", objectFit: "cover" }} />
+          <img src="/images/pokemonGuide/materials/pokeballx6.png" alt="Level 30+ pokemon team" style={{ width: "48px", height: "48px", objectFit: "cover" }} />
         </ListGroup.Item>
         <ListGroup.Item style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.75rem" }}>
           Flying Pokemon
-          <img src="/images/pokemonGuide/flying-pokemon.png" alt="Flying Pokemon" style={{ width: "48px", height: "48px", objectFit: "cover" }} />
+          <img src="/images/pokemonGuide/materials/flying-pokemon.png" alt="Flying Pokemon" style={{ width: "48px", height: "48px", objectFit: "cover" }} />
         </ListGroup.Item>
         <ListGroup.Item style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.75rem" }}>
           Cleared Celadon Game Corner
-          <img src="/images/pokemonGuide/celadon-game-corner.png" alt="Celadon Game Corner" style={{ width: "48px", height: "48px", objectFit: "cover" }} />
+          <img src="/images/pokemonGuide/materials/celadon-game-corner.png" alt="Celadon Game Corner" style={{ width: "48px", height: "48px", objectFit: "cover" }} />
         </ListGroup.Item>
         <ListGroup.Item style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.75rem" }}>
           10 Super Potions
-          <img src="/images/pokemonGuide/super-potion.png" alt="Super Potions" style={{ width: "48px", height: "48px", objectFit: "cover" }} />
+          <img src="/images/pokemonGuide/materials/super-potion.png" alt="Super Potions" style={{ width: "48px", height: "48px", objectFit: "cover" }} />
         </ListGroup.Item>
       </ListGroup>
 
       <h5>How to:</h5>
       <ListGroup as="ol" numbered>
         <ListGroup.Item as="li">Navigate to the Silph Co. office.</ListGroup.Item>
+        <ListGroup.Item as="li">Enter the office.</ListGroup.Item>
+        <ListGroup.Item as="li">Fight all team rocket grunts.</ListGroup.Item>
+        <ListGroup.Item as="li">Defeat Giovani.</ListGroup.Item>
+        <ListGroup.Item as="li">Talk to the president of Silph Co.</ListGroup.Item>
       </ListGroup>
     </div>
   );
