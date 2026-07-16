@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Col, Container, ListGroup, Row } from "react-bootstrap";
 import "./styles.css";
 
@@ -11,6 +12,16 @@ interface HowToStep {
   image: string;
   alt: string;
 }
+
+function interpolateColor(start: [number, number, number], end: [number, number, number], t: number): string {
+  const r = Math.round(start[0] + (end[0] - start[0]) * t);
+  const g = Math.round(start[1] + (end[1] - start[1]) * t);
+  const b = Math.round(start[2] + (end[2] - start[2]) * t);
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+const RED: [number, number, number] = [255, 0, 0];
+const BLUE: [number, number, number] = [0, 0, 255];
 
 const howToSteps: HowToStep[] = [
   {
@@ -42,8 +53,28 @@ const howToSteps: HowToStep[] = [
 
 
 export default function pokemonBlueGuide() {
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0;
+      setScrollProgress(Math.min(1, Math.max(0, ratio)));
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, []);
+
+  const leftBorderColor = interpolateColor(RED, BLUE, scrollProgress);
+  const rightBorderColor = interpolateColor(BLUE, RED, scrollProgress);
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem", color: "#333", padding: "0 1rem", minHeight: "100vh", borderLeft: "16px solid red", borderRight: "16px solid blue" }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem", color: "#333", padding: "0 1rem", minHeight: "100vh", borderLeft: `16px solid ${leftBorderColor}`, borderRight: `16px solid ${rightBorderColor}` }}>
       <Container>
         <Row className="guideTitle" >
           <Col xs={4}></Col>
