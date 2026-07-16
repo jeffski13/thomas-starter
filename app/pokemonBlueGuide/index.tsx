@@ -5,6 +5,40 @@ interface GuideSection {
   items: string[];
 }
 
+interface HowToStep {
+  text: string;
+  image: string;
+  alt: string;
+}
+
+const howToSteps: HowToStep[] = [
+  {
+    text: "Navigate to the Silph Co. office.",
+    image: "/images/pokemonGuide/steps/SilphCo.png",
+    alt: "Silph Co. office",
+  },
+  {
+    text: "Enter the office.",
+    image: "/images/pokemonGuide/steps/SilphCo.png",
+    alt: "Entering Silph Co.",
+  },
+  {
+    text: "Fight all team rocket grunts.",
+    image: "/images/pokemonGuide/steps/rocketGrunt.png",
+    alt: "Team Rocket grunt battle",
+  },
+  {
+    text: "Defeat Giovani.",
+    image: "/images/pokemonGuide/steps/giovanniBattle.jpg",
+    alt: "Giovanni battle",
+  },
+  {
+    text: "Talk to the president of Silph Co.",
+    image: "/images/pokemonGuide/steps/youGotAMasterball.jpg",
+    alt: "Received the Master Ball",
+  },
+];
+
 
 export default function pokemonBlueGuide() {
   return (
@@ -43,13 +77,24 @@ export default function pokemonBlueGuide() {
       </ListGroup>
 
       <h5>How to:</h5>
-      <ListGroup as="ol" numbered>
-        <ListGroup.Item as="li">Navigate to the Silph Co. office.</ListGroup.Item>
-        <ListGroup.Item as="li">Enter the office.</ListGroup.Item>
-        <ListGroup.Item as="li">Fight all team rocket grunts.</ListGroup.Item>
-        <ListGroup.Item as="li">Defeat Giovani.</ListGroup.Item>
-        <ListGroup.Item as="li">Talk to the president of Silph Co.</ListGroup.Item>
-      </ListGroup>
+      <div style={{ display: "flex", flexDirection: "column", width: "100%", maxWidth: "700px" }}>
+        {howToSteps.map((step, index) => (
+          <div key={step.text}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", padding: "1rem 0" }}>
+              <span style={{ alignSelf: "flex-start", fontWeight: "bold", fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "#666" }}>
+                Step {index + 1}
+              </span>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
+                <p style={{ margin: 0, flex: 1 }}>{step.text}</p>
+                <img src={step.image} alt={step.alt} style={{ width: "96px", height: "96px", objectFit: "cover", borderRadius: "4px" }} />
+              </div>
+            </div>
+            {index < howToSteps.length - 1 && (
+              <hr style={{ border: "none", borderTop: "3px solid #ccc", margin: 0 }} />
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
