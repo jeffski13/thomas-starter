@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card, Col, Container, ListGroupItem, Row } from "react-bootstrap";
 import ListGroup from "react-bootstrap/esm/ListGroup";
 
@@ -15,6 +16,8 @@ const craftingSteps = [
 ];
 
 export default function HowToMakeZenithPage() {
+  const [flying, setFlying] = useState(false);
+
   return (
     <div
       className="funny-border"
@@ -32,12 +35,37 @@ export default function HowToMakeZenithPage() {
         .funny-border {
           animation: funny-border-spin 4s linear infinite;
         }
+        @keyframes rainbow-fly-across {
+          0% { left: -20%; }
+          100% { left: 100%; }
+        }
+        .rainbow-bar {
+          position: fixed;
+          top: 50%;
+          width: 20%;
+          height: 40px;
+          transform: translateY(-50%) rotate(-5deg);
+          background: linear-gradient(90deg, #ff595e, #ffca3a, #8ac926, #1982c4, #6a4c93, #ff595e);
+          border-radius: 20px;
+          box-shadow: 0 0 20px rgba(0,0,0,0.3);
+          z-index: 9999;
+          pointer-events: none;
+          animation: rainbow-fly-across 1.5s ease-in-out forwards;
+        }
       `}</style>
+
+      {flying && <div className="rainbow-bar" onAnimationEnd={() => setFlying(false)} />}
 
       <img src="/images/zenith/zenith.jpg" alt="true nights edge" height={100} />
       <Container><Row>
         <Col xs={1}></Col>
-        <Col xs={3}><img src="images/zenith/logo.webp" style={{ height: "50px" }}></img></Col>
+        <Col xs={3}>
+          <img
+            src="images/zenith/logo.webp"
+            style={{ height: "50px", cursor: "pointer" }}
+            onClick={() => setFlying(true)}
+          ></img>
+        </Col>
         <Col xs={4}><h1 style={{ margin: 0 }}>How To Make Zenith</h1></Col>
         <Col xs={4}></Col>
       </Row></Container>
