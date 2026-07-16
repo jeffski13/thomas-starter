@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Col, Container, ListGroup, Row } from "react-bootstrap";
 import "./styles.css";
 
@@ -73,13 +73,85 @@ export default function pokemonBlueGuide() {
   const leftBorderColor = interpolateColor(RED, BLUE, scrollProgress);
   const rightBorderColor = interpolateColor(BLUE, RED, scrollProgress);
 
+  const BOUNCING_POKEBALL_SIZE = 80;
+  const [isBouncing, setIsBouncing] = useState(false);
+  const [bouncingPos, setBouncingPos] = useState({ x: 0, y: 0 });
+  const bouncingPosRef = useRef({ x: 0, y: 0 });
+  const bouncingVelRef = useRef({ dx: 4, dy: 3 });
+  const animationFrameRef = useRef<number | undefined>(undefined);
+
+  useEffect(() => {
+    if (!isBouncing) return;
+
+    bouncingPosRef.current = {
+      x: window.innerWidth / 2 - BOUNCING_POKEBALL_SIZE / 2,
+      y: window.innerHeight / 2 - BOUNCING_POKEBALL_SIZE / 2,
+    };
+    setBouncingPos({ ...bouncingPosRef.current });
+
+    const step = () => {
+      const pos = bouncingPosRef.current;
+      const vel = bouncingVelRef.current;
+
+      pos.x += vel.dx;
+      pos.y += vel.dy;
+
+      if (pos.x <= 0) {
+        pos.x = 0;
+        vel.dx = Math.abs(vel.dx);
+      } else if (pos.x + BOUNCING_POKEBALL_SIZE >= window.innerWidth) {
+        pos.x = window.innerWidth - BOUNCING_POKEBALL_SIZE;
+        vel.dx = -Math.abs(vel.dx);
+      }
+
+      if (pos.y <= 0) {
+        pos.y = 0;
+        vel.dy = Math.abs(vel.dy);
+      } else if (pos.y + BOUNCING_POKEBALL_SIZE >= window.innerHeight) {
+        pos.y = window.innerHeight - BOUNCING_POKEBALL_SIZE;
+        vel.dy = -Math.abs(vel.dy);
+      }
+
+      setBouncingPos({ x: pos.x, y: pos.y });
+      animationFrameRef.current = requestAnimationFrame(step);
+    };
+
+    animationFrameRef.current = requestAnimationFrame(step);
+    return () => {
+      if (animationFrameRef.current !== undefined) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [isBouncing]);
+
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem", color: "#333", padding: "0 1rem", minHeight: "100vh", borderLeft: `16px solid ${leftBorderColor}`, borderRight: `16px solid ${rightBorderColor}` }}>
+      {isBouncing && (
+        <img
+          src="/images/pokemonGuide/pokeball.png"
+          alt=""
+          style={{
+            position: "fixed",
+            left: bouncingPos.x,
+            top: bouncingPos.y,
+            width: `${BOUNCING_POKEBALL_SIZE}px`,
+            height: `${BOUNCING_POKEBALL_SIZE}px`,
+            zIndex: 1000,
+            pointerEvents: "none",
+          }}
+        />
+      )}
       <Container>
         <Row className="guideTitle" >
           <Col xs={4}></Col>
           <Col xs={4}><h2>Pokemon Guide</h2></Col>
-          <Col xs={4}><img src="/images/pokemonGuide/logo.webp" style={{ height: "50px" }} /></Col>
+          <Col xs={4}>
+            <img
+              src="/images/pokemonGuide/logo.webp"
+              style={{ height: "50px", cursor: "pointer" }}
+              onClick={() => setIsBouncing(true)}
+            />
+          </Col>
         </Row>
       </Container>
 
