@@ -227,21 +227,16 @@ export default function pokemonBlueGuide() {
       </ListGroup>
 
       <h5>How to:</h5>
-      <div style={{ display: "flex", flexDirection: "column", width: "100%", maxWidth: "700px" }}>
+      <div style={{ display: "flex", flexDirection: "column", width: "100%", maxWidth: "450px", gap: "1rem" }}>
         {howToSteps.map((step, index) => (
-          <div key={step.text}>
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", padding: "1rem 0" }}>
-              <span style={{ alignSelf: "flex-start", fontWeight: "bold", fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "#666" }}>
-                Step {index + 1}
-              </span>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
-                <p style={{ margin: 0, flex: 1 }}>{step.text}</p>
-                <img src={step.image} alt={step.alt} style={{ width: "96px", height: "96px", objectFit: "cover", borderRadius: "4px" }} />
-              </div>
+          <div key={step.text} style={{ display: "flex", flexDirection: "column", gap: "0.5rem", padding: "1rem", border: "2px solid #333", borderRadius: "8px" }}>
+            <span style={{ alignSelf: "flex-start", fontWeight: "bold", fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "#666" }}>
+              Step {index + 1}
+            </span>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
+              <p style={{ margin: 0, flex: 1, fontSize: "0.85rem" }}>{step.text}</p>
+              <img src={step.image} alt={step.alt} style={{ width: "64px", height: "64px", objectFit: "cover", borderRadius: "4px" }} />
             </div>
-            {index < howToSteps.length - 1 && (
-              <hr style={{ border: "none", borderTop: "3px solid #ccc", margin: 0 }} />
-            )}
           </div>
         ))}
       </div>
