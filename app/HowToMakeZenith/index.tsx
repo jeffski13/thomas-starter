@@ -1,5 +1,18 @@
-import { Col, Container, ListGroupItem, Row } from "react-bootstrap";
+import { Card, Col, Container, ListGroupItem, Row } from "react-bootstrap";
 import ListGroup from "react-bootstrap/esm/ListGroup";
+
+const craftingSteps = [
+  {
+    label: "Step 1",
+    text: "Go to mythril or orichalcum anvil",
+    images: ["/images/zenith/Mythril_Anvil.webp", "/images/zenith/orecalcumanvil.jpg"],
+  },
+  {
+    label: "Step 2",
+    text: "Select zenith",
+    images: ["/images/zenith/zenith.jpg"],
+  },
+];
 
 export default function HowToMakeZenithPage() {
   return (
@@ -60,10 +73,24 @@ export default function HowToMakeZenithPage() {
       </ListGroup>
 
       <h2>crafting</h2>
-      <ListGroup>
-         <ListGroup.Item as="li">1 go to mythrl or orecalcum anvil</ListGroup.Item>
-         <ListGroup.Item as="li">2 select zenith</ListGroup.Item>
-      </ListGroup>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%", maxWidth: "400px" }}>
+        {craftingSteps.map((step, index) => (
+          <div key={step.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
+            <Card style={{ width: "100%" }}>
+              <div style={{ display: "flex", justifyContent: "center", gap: "0.5rem", paddingTop: "1rem" }}>
+                {step.images.map((image) => (
+                  <img key={image} src={image} alt={step.label} style={{ height: "100px", objectFit: "contain" }} />
+                ))}
+              </div>
+              <Card.Body>
+                <Card.Title>{step.label}</Card.Title>
+                <Card.Text>{step.text}</Card.Text>
+              </Card.Body>
+            </Card>
+            {index < craftingSteps.length - 1 && <hr style={{ width: "100%" }} />}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
