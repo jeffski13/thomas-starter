@@ -61,7 +61,8 @@ export default function HowToMakeZenithPage() {
 
       <h2>crafting</h2>
       <ListGroup>
-         <ListGroup.Item as="li"> go to mythrl or orecalcum anvil</ListGroup.Item>
+         <ListGroup.Item as="li">1 go to mythrl or orecalcum anvil</ListGroup.Item>
+         <ListGroup.Item as="li">2 select zenith</ListGroup.Item>
       </ListGroup>
     </div>
   );
