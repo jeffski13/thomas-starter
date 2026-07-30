@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, Col, Container, ListGroupItem, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, ListGroupItem, Row } from "react-bootstrap";
 import ListGroup from "react-bootstrap/esm/ListGroup";
 
 const RAINBOW_SPEED_KEY = "zenith-rainbow-speed";
@@ -116,6 +116,10 @@ export default function HowToMakeZenithPage() {
           onChange={(e) => setRainbowSize(Number(e.target.value))}
         />
         <span>{rainbowSize.toFixed(1)}x</span>
+        <Button onClick={()=>{
+          setRainbowSize(1.0);
+          setRainbowSpeed(1.5);
+        }}>reset</Button>
       </div>
 
       <img src="/images/zenith/zenith.jpg" alt="true nights edge" height={100} />
