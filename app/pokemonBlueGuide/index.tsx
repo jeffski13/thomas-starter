@@ -72,8 +72,16 @@ export default function pokemonBlueGuide() {
   const [isBouncing, setIsBouncing] = useState(false);
   const [bouncingPos, setBouncingPos] = useState({ x: 0, y: 0 });
   const [bouncingRotation, setBouncingRotation] = useState(0);
-  const [speed, setSpeed] = useState(4);
-  const [colorHue, setColorHue] = useState(0);
+  const [speed, setSpeed] = useState(() => {
+    if (typeof window === "undefined") return 4;
+    const saved = window.localStorage.getItem("pokeballSpeed");
+    return saved !== null ? Number(saved) : 4;
+  });
+  const [colorHue, setColorHue] = useState(() => {
+    if (typeof window === "undefined") return 0;
+    const saved = window.localStorage.getItem("pokeballColorHue");
+    return saved !== null ? Number(saved) : 0;
+  });
   const bouncingPosRef = useRef({ x: 0, y: 0 });
   const bouncingDirRef = useRef({ x: 1, y: 1 });
   const bouncingRotationRef = useRef(0);
@@ -82,7 +90,12 @@ export default function pokemonBlueGuide() {
 
   useEffect(() => {
     speedRef.current = speed;
+    window.localStorage.setItem("pokeballSpeed", String(speed));
   }, [speed]);
+
+  useEffect(() => {
+    window.localStorage.setItem("pokeballColorHue", String(colorHue));
+  }, [colorHue]);
 
   useEffect(() => {
     if (!isBouncing) return;
