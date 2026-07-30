@@ -18,6 +18,7 @@ const craftingSteps = [
 export default function HowToMakeZenithPage() {
   const [flying, setFlying] = useState(false);
   const [rainbowSpeed, setRainbowSpeed] = useState(0.3);
+  const [rainbowSize, setRainbowSize] = useState(1);
 
   return (
     <div
@@ -43,8 +44,6 @@ export default function HowToMakeZenithPage() {
         .rainbow-bar {
           position: fixed;
           top: 25%;
-          width: 20%;
-          height: 50px;
           transform: translateY(-50%) rotate(-5deg);
           background: linear-gradient(90deg, #ff595e, #ffca3a, #8ac926, #1982c4, #6a4c93, #ff59ff);
           border-radius: 20px;
@@ -65,7 +64,11 @@ export default function HowToMakeZenithPage() {
       {flying &&
         <div
           className="rainbow-bar"
-          style={{ animationDuration: `${rainbowSpeed}s` }}
+          style={{
+            animationDuration: `${rainbowSpeed}s`,
+            width: `${20 * rainbowSize}%`,
+            height: `${50 * rainbowSize}px`,
+          }}
           onAnimationEnd={() => setFlying(false)}
         />
       }
@@ -82,6 +85,20 @@ export default function HowToMakeZenithPage() {
           onChange={(e) => setRainbowSpeed(Number(e.target.value))}
         />
         <span>{rainbowSpeed.toFixed(1)}s</span>
+      </div>
+
+      <div className="speed-meter">
+        <label htmlFor="rainbow-size">Rainbow size</label>
+        <input
+          id="rainbow-size"
+          type="range"
+          min={0.5}
+          max={4}
+          step={0.1}
+          value={rainbowSize}
+          onChange={(e) => setRainbowSize(Number(e.target.value))}
+        />
+        <span>{rainbowSize.toFixed(1)}x</span>
       </div>
 
       <img src="/images/zenith/zenith.jpg" alt="true nights edge" height={100} />
