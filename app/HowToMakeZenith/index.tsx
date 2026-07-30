@@ -17,6 +17,7 @@ const craftingSteps = [
 
 export default function HowToMakeZenithPage() {
   const [flying, setFlying] = useState(false);
+  const [rainbowSpeed, setRainbowSpeed] = useState(0.3);
 
   return (
     <div
@@ -41,20 +42,47 @@ export default function HowToMakeZenithPage() {
         }
         .rainbow-bar {
           position: fixed;
-          top: 50%;
+          top: 25%;
           width: 20%;
-          height: 40px;
+          height: 50px;
           transform: translateY(-50%) rotate(-5deg);
-          background: linear-gradient(90deg, #ff595e, #ffca3a, #8ac926, #1982c4, #6a4c93, #ff595e);
+          background: linear-gradient(90deg, #ff595e, #ffca3a, #8ac926, #1982c4, #6a4c93, #ff59ff);
           border-radius: 20px;
-          box-shadow: 0 0 20px rgba(0,0,0,0.3);
-          z-index: 9999;
+          box-shadow: 0 0 50px rgb(0, 0, 0);
+          z-index: -1;
           pointer-events: none;
-          animation: rainbow-fly-across 1.5s ease-in-out forwards;
+          animation-name: rainbow-fly-across;
+          animation-timing-function: ease-in-out;
+          animation-fill-mode: forwards;
+        }
+        .speed-meter {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
         }
       `}</style>
 
-      {flying && <div className="rainbow-bar" onAnimationEnd={() => setFlying(false)} />}
+      {flying &&
+        <div
+          className="rainbow-bar"
+          style={{ animationDuration: `${rainbowSpeed}s` }}
+          onAnimationEnd={() => setFlying(false)}
+        />
+      }
+
+      <div className="speed-meter">
+        <label htmlFor="rainbow-speed">Rainbow speed</label>
+        <input
+          id="rainbow-speed"
+          type="range"
+          min={0.1}
+          max={3}
+          step={0.1}
+          value={rainbowSpeed}
+          onChange={(e) => setRainbowSpeed(Number(e.target.value))}
+        />
+        <span>{rainbowSpeed.toFixed(1)}s</span>
+      </div>
 
       <img src="/images/zenith/zenith.jpg" alt="true nights edge" height={100} />
       <Container><Row>
@@ -77,7 +105,7 @@ export default function HowToMakeZenithPage() {
         </Col>
       </Row></Container>
 
-      
+
       <h2>Materials list</h2>
       <ListGroup>
         <ListGroup.Item className="d-flex align-items-center gap-2">
