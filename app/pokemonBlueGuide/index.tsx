@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Col, Container, ListGroup, Row } from "react-bootstrap";
+import { Button, Col, Container, ListGroup, Row } from "react-bootstrap";
 import "./styles.css";
 
 interface GuideSection {
@@ -192,6 +192,10 @@ export default function pokemonBlueGuide() {
             value={colorHue}
             onChange={(e) => setColorHue(Number(e.target.value))}
           />
+          <Button onClick={ ()=>{
+            setColorHue(0);
+            setSpeed(3);
+          } } >Reset</Button>
         </div>
       )}
       <Container>
