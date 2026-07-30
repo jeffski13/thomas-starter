@@ -23,6 +23,40 @@ function interpolateColor(start: [number, number, number], end: [number, number,
 const RED: [number, number, number] = [255, 0, 0];
 const BLUE: [number, number, number] = [0, 0, 255];
 
+type TimePeriod = "morning" | "afternoon" | "evening";
+
+function getTimePeriod(hour: number): TimePeriod {
+  if (hour >= 5 && hour < 12) return "morning";
+  if (hour >= 12 && hour < 17) return "afternoon";
+  return "evening";
+}
+
+const SUN_BALL_COLORS: Record<TimePeriod, string> = {
+  morning: "hsl(30, 100%, 50%)",
+  afternoon: "hsl(50, 100%, 50%)",
+  evening: "hsl(0, 100%, 50%)",
+};
+
+const SUN_BALL_SIZE = 100;
+const SUN_VISIBLE_TOP = 20;
+const SUN_HIDDEN_TOP = -(SUN_BALL_SIZE / 2);
+const SUN_DAY_START_HOUR = 5;
+const SUN_DAY_END_HOUR = 19;
+
+function computeSunTop(hourFraction: number): number {
+  const hoursFromNoon = Math.min(Math.abs(hourFraction - 12), 7);
+  const noonProgress = 1 - hoursFromNoon / 7;
+  return SUN_VISIBLE_TOP + (SUN_HIDDEN_TOP - SUN_VISIBLE_TOP) * noonProgress;
+}
+
+function computeSunLeft(hourFraction: number, viewportWidth: number): number {
+  const dayFraction = Math.min(
+    1,
+    Math.max(0, (hourFraction - SUN_DAY_START_HOUR) / (SUN_DAY_END_HOUR - SUN_DAY_START_HOUR))
+  );
+  return dayFraction * (viewportWidth - SUN_BALL_SIZE);
+}
+
 const howToSteps: HowToStep[] = [
   {
     text: "Navigate to the Silph Co. office.",
@@ -49,6 +83,27 @@ const howToSteps: HowToStep[] = [
 
 export default function pokemonBlueGuide() {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [timePeriod, setTimePeriod] = useState<TimePeriod | null>(null);
+  const [sunPosition, setSunPosition] = useState<{ top: number; left: number } | null>(null);
+
+  useEffect(() => {
+    const updateSun = () => {
+      const now = new Date();
+      const hourFraction = now.getHours() + now.getMinutes() / 60;
+      setTimePeriod(getTimePeriod(now.getHours()));
+      setSunPosition({
+        top: computeSunTop(hourFraction),
+        left: computeSunLeft(hourFraction, window.innerWidth),
+      });
+    };
+    updateSun();
+    window.addEventListener("resize", updateSun);
+    const interval = setInterval(updateSun, 60000);
+    return () => {
+      window.removeEventListener("resize", updateSun);
+      clearInterval(interval);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -163,6 +218,20 @@ export default function pokemonBlueGuide() {
 
   return (
     <div className="pageWrapper" style={pageWrapperVars}>
+      {timePeriod && sunPosition && (
+        <div
+          className="sunBall"
+          style={{
+            "--sun-top": `${sunPosition.top}px`,
+            "--sun-left": `${sunPosition.left}px`,
+            "--sun-color": SUN_BALL_COLORS[timePeriod],
+          } as React.CSSProperties}
+        >
+          <div className="sunRays" />
+          <img src="/images/pokemonGuide/pokeball.png" alt="" className="sunBallImage" />
+          <div className="sunBallColorOverlay" />
+        </div>
+      )}
       {isBouncing && (
         <img
           src="/images/pokemonGuide/pokeball.png"

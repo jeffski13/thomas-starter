@@ -27,6 +27,62 @@
     cursor: pointer;
 }
 
+.sunBall {
+    position: fixed;
+    top: var(--sun-top, 20px);
+    left: var(--sun-left, 0px);
+    width: 100px;
+    height: 100px;
+    transition: top 1s linear, left 1s linear;
+    pointer-events: none;
+    z-index: 500;
+}
+
+.sunRays {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 220px;
+    height: 220px;
+    transform: translate(-50%, -50%);
+    background: repeating-conic-gradient(var(--sun-color, orange) 0deg 8deg, transparent 8deg 24deg);
+    border-radius: 50%;
+    -webkit-mask-image: radial-gradient(circle, transparent 42%, black 55%, black 68%, transparent 100%);
+    mask-image: radial-gradient(circle, transparent 42%, black 55%, black 68%, transparent 100%);
+    animation: sunRaysSpin 24s linear infinite;
+    transition: background 1s linear;
+}
+
+@keyframes sunRaysSpin {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.sunBallImage {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.sunBallColorOverlay {
+    position: absolute;
+    inset: 0;
+    background-color: var(--sun-color, hsl(50, 100%, 50%));
+    mix-blend-mode: color;
+    -webkit-mask-image: url(/images/pokemonGuide/pokeball.png);
+    mask-image: url(/images/pokemonGuide/pokeball.png);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    transition: background-color 1.5s ease;
+}
+
 .speedControlPanel {
     position: fixed;
     top: 1rem;
