@@ -1,6 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, Col, Container, ListGroupItem, Row } from "react-bootstrap";
 import ListGroup from "react-bootstrap/esm/ListGroup";
+
+const RAINBOW_SPEED_KEY = "zenith-rainbow-speed";
+const RAINBOW_SIZE_KEY = "zenith-rainbow-size";
+
+function loadStoredNumber(key: string, fallback: number) {
+  const stored = localStorage.getItem(key);
+  const parsed = stored === null ? NaN : Number(stored);
+  return Number.isFinite(parsed) ? parsed : fallback;
+}
 
 const craftingSteps = [
   {
@@ -17,8 +26,16 @@ const craftingSteps = [
 
 export default function HowToMakeZenithPage() {
   const [flying, setFlying] = useState(false);
-  const [rainbowSpeed, setRainbowSpeed] = useState(0.3);
-  const [rainbowSize, setRainbowSize] = useState(1);
+  const [rainbowSpeed, setRainbowSpeed] = useState(() => loadStoredNumber(RAINBOW_SPEED_KEY, 0.3));
+  const [rainbowSize, setRainbowSize] = useState(() => loadStoredNumber(RAINBOW_SIZE_KEY, 1));
+
+  useEffect(() => {
+    localStorage.setItem(RAINBOW_SPEED_KEY, String(rainbowSpeed));
+  }, [rainbowSpeed]);
+
+  useEffect(() => {
+    localStorage.setItem(RAINBOW_SIZE_KEY, String(rainbowSize));
+  }, [rainbowSize]);
 
   return (
     <div

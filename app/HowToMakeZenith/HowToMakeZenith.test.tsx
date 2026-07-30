@@ -1,6 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import HowToMakeZenithPage from './index';
 
+beforeEach(() => {
+  localStorage.clear();
+});
+
 describe('HowToMakeZenithPage rainbow speed meter', () => {
   test('defaults to 0.3s and updates the displayed value when the slider moves', () => {
     render(<HowToMakeZenithPage />);
@@ -53,5 +57,36 @@ describe('HowToMakeZenithPage rainbow size meter', () => {
     expect(rainbowBar).toBeInTheDocument();
     expect(rainbowBar.style.width).toBe('40%');
     expect(rainbowBar.style.height).toBe('100px');
+  });
+});
+
+describe('HowToMakeZenithPage localStorage persistence', () => {
+  test('persists speed and size changes to localStorage', () => {
+    render(<HowToMakeZenithPage />);
+
+    fireEvent.change(screen.getByLabelText('Rainbow speed'), { target: { value: '1.8' } });
+    fireEvent.change(screen.getByLabelText('Rainbow size'), { target: { value: '3' } });
+
+    expect(localStorage.getItem('zenith-rainbow-speed')).toBe('1.8');
+    expect(localStorage.getItem('zenith-rainbow-size')).toBe('3');
+  });
+
+  test('loads previously saved speed and size on mount', () => {
+    localStorage.setItem('zenith-rainbow-speed', '2.4');
+    localStorage.setItem('zenith-rainbow-size', '0.7');
+
+    render(<HowToMakeZenithPage />);
+
+    expect(screen.getByText('2.4s')).toBeInTheDocument();
+    expect(screen.getByText('0.7x')).toBeInTheDocument();
+  });
+
+  test('falls back to defaults when stored values are missing or invalid', () => {
+    localStorage.setItem('zenith-rainbow-speed', 'not-a-number');
+
+    render(<HowToMakeZenithPage />);
+
+    expect(screen.getByText('0.3s')).toBeInTheDocument();
+    expect(screen.getByText('1.0x')).toBeInTheDocument();
   });
 });
