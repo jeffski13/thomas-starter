@@ -73,6 +73,7 @@ export default function pokemonBlueGuide() {
   const [bouncingPos, setBouncingPos] = useState({ x: 0, y: 0 });
   const [bouncingRotation, setBouncingRotation] = useState(0);
   const [speed, setSpeed] = useState(4);
+  const [colorHue, setColorHue] = useState(0);
   const bouncingPosRef = useRef({ x: 0, y: 0 });
   const bouncingDirRef = useRef({ x: 1, y: 1 });
   const bouncingRotationRef = useRef(0);
@@ -144,6 +145,7 @@ export default function pokemonBlueGuide() {
     "--pokeball-left": `${bouncingPos.x}px`,
     "--pokeball-top": `${bouncingPos.y}px`,
     "--pokeball-rotation": `${bouncingRotation}deg`,
+    "--pokeball-hue": `${colorHue}deg`,
   } as React.CSSProperties;
 
   return (
@@ -167,6 +169,15 @@ export default function pokemonBlueGuide() {
             max={15}
             value={speed}
             onChange={(e) => setSpeed(Number(e.target.value))}
+          />
+          <label htmlFor="pokeballColor" className="speedControlLabel">Color</label>
+          <input
+            id="pokeballColor"
+            type="range"
+            min={0}
+            max={360}
+            value={colorHue}
+            onChange={(e) => setColorHue(Number(e.target.value))}
           />
         </div>
       )}

@@ -22,6 +22,7 @@
     height: 80px;
     transform: rotate(var(--pokeball-rotation, 0deg));
     transition: transform 0.2s ease;
+    filter: hue-rotate(var(--pokeball-hue, 0deg));
     z-index: 1000;
     cursor: pointer;
 }
