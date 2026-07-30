@@ -26,6 +26,14 @@ const craftingSteps = [
 
 export default function HowToMakeZenithPage() {
   const [flying, setFlying] = useState(false);
+  const [dancing, setDancing] = useState(false);
+  const [grabbing, setGrabbing] = useState(false);
+  const [showDeathText, setShowDeathText] = useState(false);
+
+  function dismissGrab() {
+    setGrabbing(false);
+    setShowDeathText(false);
+  }
   const [rainbowSpeed, setRainbowSpeed] = useState(() => loadStoredNumber(RAINBOW_SPEED_KEY, 0.3));
   const [rainbowSize, setRainbowSize] = useState(() => loadStoredNumber(RAINBOW_SIZE_KEY, 1));
 
@@ -76,7 +84,81 @@ export default function HowToMakeZenithPage() {
           align-items: center;
           gap: 0.5rem;
         }
+        @keyframes man-guy-dance {
+          0%, 100% { transform: rotate(0deg) scale(1); }
+          25% { transform: rotate(-20deg) scale(1.2); }
+          50% { transform: rotate(20deg) scale(0.9); }
+          75% { transform: rotate(-10deg) scale(1.1); }
+        }
+        .man-guy {
+          font-size: 4.5rem;
+          line-height: 1;
+          cursor: pointer;
+          display: inline-block;
+        }
+        .man-guy.dancing {
+          animation: man-guy-dance 0.6s ease-in-out;
+        }
+        .grab-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.85);
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          cursor: pointer;
+        }
+        @keyframes grabbing-hand-in {
+          0% { transform: translate(120vw, 120vh) rotate(30deg) scale(1); }
+          60% { transform: translate(-5vw, -5vh) rotate(-10deg) scale(3); }
+          100% { transform: translate(0, 0) rotate(0deg) scale(2.5); }
+        }
+        .grabbing-hand {
+          font-size: 8rem;
+          animation: grabbing-hand-in 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        @keyframes death-text-fade {
+          from { opacity: 0; transform: scale(0.8); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        .death-text {
+          position: absolute;
+          text-align: center;
+          animation: death-text-fade 0.6s ease-out forwards;
+        }
+        .you-died {
+          font-size: 4rem;
+          font-weight: bold;
+          color: #b30000;
+          letter-spacing: 0.1em;
+        }
+        .dont-be-surprised {
+          font-size: 1.25rem;
+          color: #eee;
+          margin-top: 0.5rem;
+        }
       `}</style>
+
+      {grabbing &&
+        <div className="grab-overlay" onClick={dismissGrab}>
+          <span
+            role="img"
+            aria-label="grabbing hand"
+            className="grabbing-hand"
+            onAnimationEnd={() => setShowDeathText(true)}
+          >
+            🖐️
+          </span>
+          {showDeathText &&
+            <div className="death-text">
+              <div className="you-died">YOU DIED</div>
+              <div className="dont-be-surprised">don't be surprised</div>
+            </div>
+          }
+        </div>
+      }
 
       {flying &&
         <div
@@ -120,6 +202,7 @@ export default function HowToMakeZenithPage() {
           setRainbowSize(1.0);
           setRainbowSpeed(1.5);
         }}>reset</Button>
+        <Button variant="dark" onClick={() => setGrabbing(true)}>???</Button>
       </div>
 
       <img src="/images/zenith/zenith.jpg" alt="true nights edge" height={100} />
@@ -133,13 +216,22 @@ export default function HowToMakeZenithPage() {
           ></img>
         </Col>
         <Col xs={4}><h1 style={{ margin: 0 }}>How To Make Zenith</h1></Col>
-        <Col xs={4}>
+        <Col xs={4} className="d-flex align-items-center gap-2">
           <img
             src="/images/pokedex-icon.png"
             alt="pokedex"
             style={{ height: "50px", cursor: "pointer" }}
             onClick={() => new Audio("/augh.mp3").play()}
           />
+          <span
+            role="img"
+            aria-label="man guy"
+            className={`man-guy${dancing ? " dancing" : ""}`}
+            onClick={() => setDancing(true)}
+            onAnimationEnd={() => setDancing(false)}
+          >
+            🕺
+          </span>
         </Col>
       </Row></Container>
 

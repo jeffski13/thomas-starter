@@ -80,6 +80,8 @@ export default function TetrisPage() {
   const [lines, setLines] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [paused, setPaused] = useState(false);
+  const [showSussy, setShowSussy] = useState(false);
+  const [showVerity, setShowVerity] = useState(false);
 
   const boardRef = useRef(board);
   const pieceRef = useRef(piece);
@@ -194,6 +196,122 @@ export default function TetrisPage() {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem", padding: "1rem" }}>
       <h2 style={{ margin: 0 }}>Tetris</h2>
+
+      <button
+        onClick={() => setShowSussy(v => !v)}
+        style={{
+          padding: "0.4rem 0.8rem",
+          cursor: "pointer",
+          backgroundColor: "#333",
+          color: "#fff",
+          border: "1px solid #666",
+          borderRadius: "0.3rem",
+          fontSize: "0.85rem",
+        }}
+      >
+        sussyrizzrizz
+      </button>
+
+      <button
+        onClick={() => setShowVerity(v => !v)}
+        style={{
+          padding: "0.4rem 0.8rem",
+          cursor: "pointer",
+          backgroundColor: "#333",
+          color: "#fff",
+          border: "1px solid #666",
+          borderRadius: "0.3rem",
+          fontSize: "0.85rem",
+        }}
+      >
+        verity
+      </button>
+
+      {showVerity && (
+        <div
+          role="img"
+          aria-label="verity"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            fontSize: "4rem",
+            lineHeight: 1,
+            animation: "verity-glow 1.5s ease-in-out infinite",
+          }}
+        >
+          <span>😊</span>
+          <span
+            style={{
+              fontSize: "1rem",
+              fontWeight: "bold",
+              color: "#fff",
+              textShadow: "0 0 8px #b39ddb, 0 0 16px #b39ddb",
+            }}
+          >
+            verity
+          </span>
+        </div>
+      )}
+
+      {showSussy && (
+        <div
+          role="img"
+          aria-label="sussyrizzrizz guy"
+          style={{
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            fontSize: "4rem",
+            lineHeight: 1,
+            animation: "sussy-swagger 1.2s ease-in-out infinite",
+          }}
+        >
+          <span
+            style={{
+              position: "absolute",
+              top: "-0.5rem",
+              right: "-0.75rem",
+              fontSize: "1.25rem",
+              fontWeight: "bold",
+              color: "#fff",
+              backgroundColor: "#c0392b",
+              borderRadius: "50%",
+              width: "1.75rem",
+              height: "1.75rem",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            4
+          </span>
+          <span>🕴️</span>
+          <span
+            style={{
+              fontSize: "1rem",
+              fontWeight: "bold",
+              background: "linear-gradient(90deg, #ff595e, #ffca3a, #8ac926, #1982c4, #6a4c93)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            sussyrizzrizz
+          </span>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes sussy-swagger {
+          0%, 100% { transform: rotate(-8deg) translateY(0); }
+          50% { transform: rotate(8deg) translateY(-6px); }
+        }
+        @keyframes verity-glow {
+          0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 4px #b39ddb); }
+          50% { transform: translateY(-10px) scale(1.1); filter: drop-shadow(0 0 14px #b39ddb); }
+        }
+      `}</style>
 
       <div style={{ display: "flex", gap: "1.5rem", alignItems: "flex-start" }}>
         {/* Board */}

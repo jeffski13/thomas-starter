@@ -60,6 +60,54 @@ describe('HowToMakeZenithPage rainbow size meter', () => {
   });
 });
 
+describe('HowToMakeZenithPage man guy', () => {
+  test('starts dancing on click and stops when the animation ends', () => {
+    render(<HowToMakeZenithPage />);
+
+    const manGuy = screen.getByRole('img', { name: 'man guy' });
+    expect(manGuy).not.toHaveClass('dancing');
+
+    fireEvent.click(manGuy);
+    expect(manGuy).toHaveClass('dancing');
+
+    fireEvent.animationEnd(manGuy);
+    expect(manGuy).not.toHaveClass('dancing');
+  });
+});
+
+describe('HowToMakeZenithPage grab jumpscare', () => {
+  test('button reveals grabbing hand, then death text after the hand animation ends', () => {
+    render(<HowToMakeZenithPage />);
+
+    expect(screen.queryByRole('img', { name: 'grabbing hand' })).not.toBeInTheDocument();
+    expect(screen.queryByText('YOU DIED')).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: '???' }));
+
+    const hand = screen.getByRole('img', { name: 'grabbing hand' });
+    expect(hand).toBeInTheDocument();
+    expect(screen.queryByText('YOU DIED')).not.toBeInTheDocument();
+
+    fireEvent.animationEnd(hand);
+
+    expect(screen.getByText('YOU DIED')).toBeInTheDocument();
+    expect(screen.getByText("don't be surprised")).toBeInTheDocument();
+  });
+
+  test('clicking the overlay dismisses the hand and the death text', () => {
+    const { container } = render(<HowToMakeZenithPage />);
+
+    fireEvent.click(screen.getByRole('button', { name: '???' }));
+    fireEvent.animationEnd(screen.getByRole('img', { name: 'grabbing hand' }));
+    expect(screen.getByText('YOU DIED')).toBeInTheDocument();
+
+    fireEvent.click(container.querySelector('.grab-overlay')!);
+
+    expect(screen.queryByRole('img', { name: 'grabbing hand' })).not.toBeInTheDocument();
+    expect(screen.queryByText('YOU DIED')).not.toBeInTheDocument();
+  });
+});
+
 describe('HowToMakeZenithPage localStorage persistence', () => {
   test('persists speed and size changes to localStorage', () => {
     render(<HowToMakeZenithPage />);
