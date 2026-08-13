@@ -82,6 +82,16 @@ export default function TetrisPage() {
   const [paused, setPaused] = useState(false);
   const [showSussy, setShowSussy] = useState(false);
   const [showVerity, setShowVerity] = useState(false);
+  const [secretMessage, setSecretMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("http://localhost:8080/secret")
+      .then(res => res.ok ? res.text() : Promise.reject(new Error(`status ${res.status}`)))
+      .then(text => { if (!cancelled) setSecretMessage(text); })
+      .catch(() => { if (!cancelled) setSecretMessage(null); });
+    return () => { cancelled = true; };
+  }, []);
 
   const boardRef = useRef(board);
   const pieceRef = useRef(piece);
@@ -433,6 +443,7 @@ export default function TetrisPage() {
 
       <div style={{ fontSize: "0.75rem", color: "#666", textAlign: "center" }}>
         ← → Move &nbsp;|&nbsp; ↑ Rotate &nbsp;|&nbsp; ↓ Soft drop &nbsp;|&nbsp; Space Hard drop &nbsp;|&nbsp; P Pause
+        {secretMessage && <>&nbsp;({secretMessage})</>}
       </div>
     </div>
   );
