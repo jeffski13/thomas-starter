@@ -164,3 +164,13 @@
     object-fit: cover;
     border-radius: 4px;
 }
+
+.secretMessage {
+    width: 100%;
+    max-width: 450px;
+    padding: 1rem;
+    border: 2px dashed #666;
+    border-radius: 8px;
+    font-style: italic;
+    text-align: center;
+}

@@ -85,6 +85,22 @@ export default function pokemonBlueGuide() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [timePeriod, setTimePeriod] = useState<TimePeriod | null>(null);
   const [sunPosition, setSunPosition] = useState<{ top: number; left: number } | null>(null);
+  const [secretMessage, setSecretMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("http://192.168.50.220:8080/secret")
+      .then((res) => res.text())
+      .then((text) => {
+        if (!cancelled) setSecretMessage(text);
+      })
+      .catch(() => {
+        if (!cancelled) setSecretMessage(null);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     const updateSun = () => {
@@ -320,6 +336,12 @@ export default function pokemonBlueGuide() {
           </div>
         ))}
       </div>
+
+      {secretMessage && (
+        <div className="secretMessage">
+          {secretMessage}
+        </div>
+      )}
     </div>
   );
 }
