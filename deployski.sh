@@ -36,4 +36,4 @@ npmVersion=$(node -p "require('./package.json').version")
 git add ./.firebase/hosting.cHVibGlj.cache
 git commit -m "firebase cache for release. v$npmVersion"
 
-git push --tags origin master
+# git push --tags origin main
