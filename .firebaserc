@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "jeffdotski"
+  },
+  "targets": {
+    "jeffdotski": {
+      "hosting": {
+        "thomas": [
+          "jeffski-thomas"
+        ]
+      }
+    }
+  }
+}
