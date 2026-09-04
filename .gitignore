@@ -6,7 +6,4 @@
 /build/
 /coverage/
 
-# Env
-.env
-
 /node_modules/
