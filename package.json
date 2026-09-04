@@ -12,6 +12,7 @@
     "dev": "react-router dev",
     "start": "react-router dev --host",
     "startofficial": "react-router-serve ./build/server/index.js",
+    "deploy": "npm run build && firebase deploy --only hosting",
     "test": "vitest",
     "testCoverage": "vitest --coverage",
     "typecheck": "react-router typegen && tsc"
