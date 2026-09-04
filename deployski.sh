@@ -33,7 +33,7 @@ cd $executionScriptDir
 
 echo "commiting firebase cache files."
 npmVersion=$(node -p "require('./package.json').version")
-git add ./.firebase/hosting.cHVibGlj.cache
+git add ./.firebase/hosting.YnVpbGQvY2xpZW50.cache
 git commit -m "firebase cache for release. v$npmVersion"
 
 # git push --tags origin main
