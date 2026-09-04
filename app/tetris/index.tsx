@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { fetchSecretMessage } from "./secret";
 
 const COLS = 10;
 const ROWS = 20;
@@ -86,8 +87,7 @@ export default function TetrisPage() {
 
   useEffect(() => {
     let cancelled = false;
-    fetch("http://localhost:8080/secret")
-      .then(res => res.ok ? res.text() : Promise.reject(new Error(`status ${res.status}`)))
+    fetchSecretMessage()
       .then(text => { if (!cancelled) setSecretMessage(text); })
       .catch(() => { if (!cancelled) setSecretMessage(null); });
     return () => { cancelled = true; };
